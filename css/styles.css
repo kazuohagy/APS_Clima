@@ -7,6 +7,6 @@
 }
 body{
     background: linear-gradient(180deg, rgba(89,76,238,1) 0%, #8dd0f5 100%);
-    display:flex
-    
+    display:flex;
+    justify-content:center;
 }
