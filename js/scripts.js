@@ -30,8 +30,20 @@ const getCountries = async(city)=>{
     const apiCountryURL = `https://api.unsplash.com/search/photos/?query=${city}&orientation=landscape&client_id=m35PZP1GOTMIowNPX6Rk70Hf5WdKJlbhZSRtk0KNndk`
     const res = await fetch(apiCountryURL)
     const data = await res.json();
-    console.log("Esse aqui e a Cidade", data)
+    // console.log("Esse aqui e a Cidade", data)
     return data;
+}
+const showBackground = async(city)=>{
+    try{
+    const data = await getCountries(city)
+    const image = data.results[0].urls.regular
+    document.body.style.backgroundImage = `url(${image})`
+    document.body.style.backgroundSize = "cover"
+    document.body.style.backgroundPosition = "center"
+    document.body.style.backgroundRepeat = "no-repeat"
+    }catch(err){
+        console.log("Nao foi possivel encontrar a imagem")
+    }
 }
 const showWeatherData = async(city)=>{
     try{
@@ -59,7 +71,7 @@ searchBtn.addEventListener("click",(e)=>{
     e.preventDefault()
     const city = cityInput.value;
         showWeatherData(city)
-        getCountries(city)
+        showBackground(city)
 
     
 })
@@ -68,6 +80,6 @@ cityInput.addEventListener("keyup", (e)=>
 {if(e.code == "Enter"){
     const city = e.target.value;
     showWeatherData(city)
-    getCountries(city)
+    showBackground(city)
 
 }})
